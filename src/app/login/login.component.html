@@ -1,0 +1,97 @@
+<div class="back">
+  <div class="login-card">
+    <h1>Login</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <label for="email">User Id</label>
+      <input
+        placeholder="myAdmin"
+        type="text"
+        id="email"
+        name="userid"
+        formControlName="userid"
+        required
+      />
+      <span
+        class="alert"
+        *ngIf="
+          loginForm.get('userid')?.invalid &&
+          (loginForm.get('userid')?.touched || loginForm.get('userid')?.dirty)
+        "
+      >
+        <span class="alert" *ngIf="loginForm.get('userid').errors['required']"
+          ><small>User id is required</small></span
+        >
+        <span
+          class="alert"
+          *ngIf="
+            loginForm.get('userid').errors['minlength'] &&
+            !loginForm.get('userid').errors['pattern']
+          "
+          ><small>Please enter more than 3 charecters</small></span
+        >
+        <span class="alert" *ngIf="loginForm.get('userid').errors['maxlength']"
+          ><small>Please enter less than 10 charecters &nbsp;</small></span
+        >
+        <span
+          class="alert"
+          *ngIf="
+            loginForm.get('userid').errors['pattern'] &&
+            !loginForm.get('userid').errors['minlength']
+          "
+          ><small>Please enter only alphabets</small></span
+        >
+        <span
+          class="alert"
+          *ngIf="
+            loginForm.get('userid').errors['pattern'] &&
+            loginForm.get('userid').errors['minlength']
+          "
+          ><small>Please enter only alphabets </small></span
+        ></span>
+     <br><br> <label for="password">Password</label><br>
+        <input
+          type="password"
+          id="password"
+          class="hide-pass"
+          [type]="hide ? 'password' : 'text'"
+          name="password"
+          placeholder="myAdminPassword"
+          formControlName="password"
+          required
+        >
+        <mat-icon class="placeholder" (click)="myFunction()">{{
+          hide ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      <span
+        class="alert"
+        *ngIf="
+          loginForm.get('password')?.invalid &&
+          (loginForm.get('password')?.touched ||
+            loginForm.get('password')?.dirty)
+        "
+      >
+        <span
+          class="alert"
+          *ngIf="loginForm.get('password').errors['minlength']"
+          ><small>Please enter more than 3 charecters</small></span
+        >
+        <span class="alert" *ngIf="loginForm.get('password').errors['required']"
+          ><small>Password is required</small></span
+        >
+        <span
+          class="alert"
+          *ngIf="loginForm.get('password').errors['maxlength']"
+          ><small>Please enter less than 16 charecters</small></span
+        ><br /> </span
+      ><br />
+      <div class="center">
+        <input type="submit" [disabled]="loginForm.invalid" value="Login" />
+      </div>
+    </form>
+    <div class="error-message center">
+      <div *ngIf="message">{{ message }}</div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

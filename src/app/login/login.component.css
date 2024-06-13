@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+.back{
+  height: 100%;
+  padding: 5%;
+  height: 70.5%;
+}
+
+.login-card {
+  max-width: 450px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  color: #eff3ef;
+  background: linear-gradient(#555858, transparent);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.login-card h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #e6e6e6;
+}
+.login-card input[type="text"], .login-card input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #eff3ef;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size:large;
+  background-color: transparent;
+  color: blanchedalmond;
+}
+.login-card button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  font-size: large;
+  border-radius: 8px;
+}
+input[type=submit]:disabled {
+  border: 1px solid #999999;
+  background-color: #999999;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 12px 20px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor:not-allowed;
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 50%;
+  margin-top: 10px;
+  font-size: large;
+  border-radius: 8px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.login-card button[type="submit"]:hover {
+  background-color: #45a049;
+}
+.login-card a {
+  color: #4CAF50;
+}
+.login-card .error-message {
+  color: red;
+  font-size: 16px;
+  margin-top: 10px;
+  background-color: #e6e6e6;
+}
+.center{
+  text-align: center;
+}
+.alert{
+  color:red;
+  font-size: 16px;
+  text-align:left ;
+  float:left;
+  
+}
+.login-card input.ng-invalid.ng-touched{
+  border: red 1px solid ;
+}
+.input-placeholder {
+  position: relative;
+  white-space: pre;
+}
+.hide-pass{
+  float:left;
+}
+.placeholder{
+  position: relative;
+  top: -45px;
+  right:-90%;
+
+}
+
