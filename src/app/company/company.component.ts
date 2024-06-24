@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Componen
 /* Core Grid CSS */
 import 'ag-grid-community/styles/ag-grid.css';
@@ -16,6 +17,7 @@ import {
 } from 'ag-grid-community';
 import { ClientSideRowModelModule } from 'ag-grid-community';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
+import { CompanyService } from '../services/company.service';
 import { ICompany } from "../company"
 
 
@@ -28,19 +30,57 @@ import { ICompany } from "../company"
 })
 export class CompanyComponent {
 
-  // Row Data: The data to be displayed.
-  rowData = [
-    { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-    { make: "Ford", model: "F-Series", price: 33850, electric: false },
-    { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-  ];
+  private gridApi!: GridApi<ICompany>;
+  companyService: CompanyService = inject(CompanyService);
 
   // Column Definitions: Defines the columns to be displayed.
-  colDefs: ColDef[] = [
-    { field: "make" },
-    { field: "model" },
-    { field: "price" },
-    { field: "electric" }
+  public columnDefs: ColDef[] = [
+    { field: "id", maxWidth: 50 },
+    { field: "name", minWidth: 100 },
+    { field: "code", maxWidth: 120 },
+    { field: "address", minWidth: 150 },
+    { field: "type", maxWidth: 100 },
+    { field: "insertDate", maxWidth: 180 },
+    { field: "lastUpdate", maxWidth: 180 },
   ];
+  public defaultColDef: ColDef = {
+    flex: 1,
+    minWidth: 100,
+  };
 
+  public rowSelection: "single" | "multiple" = "multiple";
+  public rowData!: ICompany[];
+  public themeClass: string =
+    "ag-theme-quartz";
+  
+  constructor(private http: HttpClient) {}
+
+  onSelectionChanged() {
+    var selectedRows = this.gridApi.getSelectedRows();
+    var selectedRowsString = "";
+    var maxToShow = 5;
+    selectedRows.forEach(function (selectedRow, index) {
+      if (index >= maxToShow) {
+        return;
+      }
+      if (index > 0) {
+        selectedRowsString += ", ";
+      }
+      selectedRowsString += selectedRow.name;
+    });
+    if (selectedRows.length > maxToShow) {
+      var othersCount = selectedRows.length - maxToShow;
+      selectedRowsString +=
+        " and " + othersCount + " other" + (othersCount !== 1 ? "s" : "");
+    }
+    (document.querySelector("#selectedRows") as any).innerHTML =
+      selectedRowsString;
+  }
+  
+  onGridReady(params: GridReadyEvent<ICompany>) {
+    this.gridApi = params.api;
+
+    this.companyService.getCompanies()
+    .subscribe((companies) => (this.rowData = companies));
+  }  
 }

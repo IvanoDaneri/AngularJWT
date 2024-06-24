@@ -11,8 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { CompanyComponent } from './company/company.component';
-import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FooterComponent } from './footer/footer.component';
@@ -29,8 +27,6 @@ See Angular.docx.
   declarations: [
     AppComponent,
     HomeComponent,
-    // CompanyComponent,
-    EmployeeComponent,
     LoginComponent,
     LogoutComponent,
     FooterComponent

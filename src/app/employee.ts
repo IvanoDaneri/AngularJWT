@@ -1,9 +1,13 @@
+
 export interface IEmployee {
-    id: number;
-    name: string;
-    code: string;
-    address: string;
-    type: string;
-    insertDate: string;
-    lastUpdate: string;
-  }
+  id: number;
+  name: string;
+  surname: string;
+  birthday: string;
+  fiscalCode: string;
+  role: string;
+  companyName: string;
+  companyCode: string;
+  insertDate: string;
+  lastUpdate: string;
+}

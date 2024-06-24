@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { ILogin } from '../login';
 import { catchError } from 'rxjs';
 import { Observable, of, throwError } from "rxjs";
+import { ILogin } from '../login';
 
 @Injectable({
   providedIn: 'root' // It garanties that AuthService service is singleton, but window.location.reload() reload application an AuthService is created newly 
@@ -17,8 +17,8 @@ export class AuthService {
   login(credentials: ILogin): Observable<ILogin> {
     return new Observable(observer => {
 
-      const headers = {'content-type': 'application/json'}
-      const body=JSON.stringify(credentials);
+      const headers = {'Content-Type': 'application/json'}
+      const body = JSON.stringify(credentials);
   
       this.http.post(this.loginUrl, body, { headers, responseType: 'text' })
       .subscribe({
@@ -61,4 +61,4 @@ export class AuthService {
   }
 
 
-}
+  }

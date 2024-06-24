@@ -1,8 +1,15 @@
-<p>Company works!</p>
 <!-- The AG Grid component -->
-<ag-grid-angular
-    class="ag-theme-quartz"
-    style="height: 500px;"
+<div class="example-header">
+    Selection:
+    <span id="selectedRows"></span>
+</div>
+  <ag-grid-angular
+    style="width: 100%; height: 100%;"
+    [columnDefs]="columnDefs"
+    [defaultColDef]="defaultColDef"
+    [rowSelection]="rowSelection"
     [rowData]="rowData"
-    [columnDefs]="colDefs">
-</ag-grid-angular>
+    [class]="themeClass"
+    (selectionChanged)="onSelectionChanged()"
+    (gridReady)="onGridReady($event)"
+  ></ag-grid-angular>
