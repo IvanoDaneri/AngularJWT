@@ -29,7 +29,7 @@ See Angular.docx.
   declarations: [
     AppComponent,
     HomeComponent,
-    CompanyComponent,
+    // CompanyComponent,
     EmployeeComponent,
     LoginComponent,
     LogoutComponent,

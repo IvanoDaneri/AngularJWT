@@ -5,7 +5,7 @@ import { catchError } from 'rxjs';
 import { Observable, of, throwError } from "rxjs";
 
 @Injectable({
-  providedIn: 'root' // It garanties that AuthService service is singleton
+  providedIn: 'root' // It garanties that AuthService service is singleton, but window.location.reload() reload application an AuthService is created newly 
 })
 export class AuthService {
 
@@ -15,7 +15,7 @@ export class AuthService {
    }
 
   login(credentials: ILogin): Observable<ILogin> {
-    return Observable.create(observer => {
+    return new Observable(observer => {
 
       const headers = {'content-type': 'application/json'}
       const body=JSON.stringify(credentials);
