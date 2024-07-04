@@ -15,8 +15,8 @@ import {
   ModuleRegistry,
   createGrid,
 } from 'ag-grid-community';
-import { ClientSideRowModelModule } from 'ag-grid-community';
-ModuleRegistry.registerModules([ClientSideRowModelModule]);
+/*import { ClientSideRowModelModule } from 'ag-grid-community';
+ModuleRegistry.registerModules([ClientSideRowModelModule]);*/
 import { CompanyService } from '../services/company.service';
 import { ICompany } from "../company"
 

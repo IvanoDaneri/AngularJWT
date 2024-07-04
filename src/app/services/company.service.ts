@@ -30,9 +30,6 @@ export class CompanyService {
                 })};
         
             const headers = {'Authorization':  localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*'};
-            // this.http.get<ICompany[]>(this.urlCompany, { headers })
-
-            // this.http.get<ICompany[]>(this.urlCompany, { withCredentials: true })
             this.http.get<ICompany[]>(this.urlCompany, { headers })
             .subscribe({
                 next: companies => {

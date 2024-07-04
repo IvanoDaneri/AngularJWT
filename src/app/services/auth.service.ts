@@ -9,7 +9,8 @@ import { ILogin } from '../login';
 })
 export class AuthService {
 
-  loginUrl = 'http://localhost:8092/springBootRest/logon';
+  logonUrl = 'http://localhost:8092/springBootRest/logon';
+  logoffUrl = 'http://localhost:8092/springBootRest/logoff';
 
   constructor(private http: HttpClient) {
    }
@@ -20,7 +21,7 @@ export class AuthService {
       const headers = {'Content-Type': 'application/json'}
       const body = JSON.stringify(credentials);
   
-      this.http.post(this.loginUrl, body, { headers, responseType: 'text' })
+      this.http.post(this.logonUrl, body, { headers, responseType: 'text' })
       .subscribe({
         next: token => {
           if(token == null) {
@@ -32,6 +33,7 @@ export class AuthService {
             credentials.token = token;
             localStorage.setItem('token', token)
             localStorage.setItem('isLoggedIn', "true");
+            console.log('User: ' + credentials.user + ' logged')
             observer.next(credentials);
             observer.complete();
           }        
@@ -46,7 +48,8 @@ export class AuthService {
     })
   }
 
-  isLogged(): boolean {
+  isLogged(): boolean 
+  {
     if (localStorage.getItem('isLoggedIn') === 'true') {
       return true;
     }
@@ -55,10 +58,16 @@ export class AuthService {
     }
   }
 
-  logoutva() {
+  logoutva() 
+  {
+    const headers = {'Content-Type':  'application/json', 'Authorization':  localStorage.getItem('token')};
+    // How to call an http post rest call without to wait for result (http://localhost:8092/springBootRest/logoff return void)
+    this.http.post(this.logoffUrl, null, { headers, responseType: 'text' })
+    .subscribe()
+
     localStorage.setItem('isLoggedIn', "false");
     localStorage.removeItem('token');
   }
 
 
-  }
+}
