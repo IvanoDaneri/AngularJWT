@@ -63,7 +63,7 @@ export class AuthService {
     const headers = {'Content-Type':  'application/json', 'Authorization':  localStorage.getItem('token')};
     // How to call an http post rest call without to wait for result (this is because http://localhost:8092/springBootRest/logoff return void)
     this.http.post(this.logoffUrl, null, { headers, responseType: 'text' })
-    .subscribe()
+    .subscribe();
 
     localStorage.setItem('isLoggedIn', "false");
     localStorage.removeItem('token');
