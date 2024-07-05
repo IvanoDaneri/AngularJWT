@@ -1,19 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { Observable, of, throwError } from "rxjs";
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { StorageService } from '../services/storage.service';
 import { ICompany } from "../company"
+
+const GET_COMPANY_URL = 'http://localhost:8092/springBootRest/companies';
 
 @Injectable({
     providedIn: 'root' // It garanties that AuthService service is singleton, but window.location.reload() reload application an AuthService is created newly 
   })
 export class CompanyService {
  
-    urlCompany = 'http://localhost:8092/springBootRest/companies';
     emptyCompanies: ICompany[] = [];
     message: string = "";
     action: string = "Error!"
+    storageService: StorageService = inject(StorageService);
 
     constructor(private http: HttpClient, private snackBar: MatSnackBar) {
      }
@@ -23,14 +26,8 @@ export class CompanyService {
 
         return new Observable(observer => {
 
-            const httpOptions = {
-                headers: new HttpHeaders({
-                    'Content-Type':  'application/json',
-                    'Authorization':  localStorage.getItem('token')
-                })};
-        
-            const headers = {'Authorization':  localStorage.getItem('token'), 'Access-Control-Allow-Origin': '*'};
-            this.http.get<ICompany[]>(this.urlCompany, { headers })
+            const headers = {'Authorization': this.storageService.getToken(), 'Access-Control-Allow-Origin': '*'};
+            this.http.get<ICompany[]>(GET_COMPANY_URL, { headers })
             .subscribe({
                 next: companies => {
                 if(companies == null) {

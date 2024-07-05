@@ -1,42 +1,46 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs';
 import { Observable, of, throwError } from "rxjs";
-import { ILogin } from '../login';
+import { StorageService } from '../services/storage.service';
+import { ICredentials } from '../login';
+import { ISession } from '../session';
+
+// Rest service for logon/logoff
+const LOGON_URL = 'http://localhost:8092/springBootRest/logon';
+const LOGOFF_URL = 'http://localhost:8092/springBootRest/logoff';
 
 @Injectable({
   providedIn: 'root' // It garanties that AuthService service is singleton, but window.location.reload() reload application an AuthService is created newly 
 })
 export class AuthService {
 
-  logonUrl = 'http://localhost:8092/springBootRest/logon';
-  logoffUrl = 'http://localhost:8092/springBootRest/logoff';
+  storageService: StorageService = inject(StorageService);
 
   constructor(private http: HttpClient) {
-   }
+  }
 
-  login(credentials: ILogin): Observable<ILogin> {
+  login(credentials: ICredentials): Observable<ICredentials> {
     return new Observable(observer => {
 
       const headers = {'Content-Type': 'application/json'}
       const body = JSON.stringify(credentials);
   
-      this.http.post(this.logonUrl, body, { headers, responseType: 'text' })
+      this.http.post<ISession>(LOGON_URL, body, { headers })
       .subscribe({
-        next: token => {
-          if(token == null) {
+        next: session => {
+          if(session == null) {
             credentials.message = "Invalid user id or password";
             observer.next(credentials);
             observer.complete();
           }
           else {
-            credentials.token = token;
-            localStorage.setItem('token', token)
-            localStorage.setItem('isLoggedIn', "true");
+            credentials.token = session.token;
+            this.storageService.saveUser(session);
             console.log('User: ' + credentials.user + ' logged')
             observer.next(credentials);
             observer.complete();
-          }        
+          }
         },
         error: error => {
           credentials.message = "Error calling login service";
@@ -50,23 +54,17 @@ export class AuthService {
 
   isLogged(): boolean 
   {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-      return true;
-    }
-    else {
-      return false;
-    }
+    return this.storageService.isLoggedIn();
   }
 
-  logoutva() 
+  logout() 
   {
-    const headers = {'Content-Type':  'application/json', 'Authorization':  localStorage.getItem('token')};
+    const headers = {'Content-Type':  'application/json', 'Authorization':  this.storageService.getToken()};
     // How to call an http post rest call without to wait for result (this is because http://localhost:8092/springBootRest/logoff return void)
-    this.http.post(this.logoffUrl, null, { headers, responseType: 'text' })
+    this.http.post(LOGOFF_URL, null, { headers, responseType: 'text' })
     .subscribe();
 
-    localStorage.setItem('isLoggedIn', "false");
-    localStorage.removeItem('token');
+    this.storageService.deleteUser();
   }
 
 

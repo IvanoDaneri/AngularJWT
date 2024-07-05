@@ -33,7 +33,7 @@ export class AppComponent {
 
   logout() {
     console.log("Logout");
-    this.authService.logoutva();
+    this.authService.logout();
     this.router.navigate(['/home']);
     location.reload();
 

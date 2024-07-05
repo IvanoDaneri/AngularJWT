@@ -1,4 +1,4 @@
-export interface ILogin {
+export interface ICredentials {
   user: string;
   password: string;
   token: string;

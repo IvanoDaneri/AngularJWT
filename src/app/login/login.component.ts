@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ILogin } from '../login';
+import { ICredentials } from '../login';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
@@ -14,7 +14,7 @@ import { Observable, of, throwError } from "rxjs";
 })
 export class LoginComponent implements OnInit {
 
-  credentials: ILogin = { user: "myAdmin", password: "myAdminPassword", token: null, message: null };
+  credentials: ICredentials = { user: "myAdmin", password: "myAdminPassword", token: null, message: null };
   authService: AuthService = inject(AuthService);
   loginForm: FormGroup;
   message: string;
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
+    if (this.authService.isLogged()) {
       this.router.navigate(['/company']);
     } else {
       this.router.navigate(['/login']);
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       this.credentials.password = this.f['password'].value;
 
       this.authService.login(this.credentials)
-      .subscribe((credentials: ILogin) => {
+      .subscribe((credentials: ICredentials) => {
         if(this.credentials.token == null){
           this.message = this.credentials.message;
         }

@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, Router,RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from './services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard  {
+
+  authService: AuthService = inject(AuthService);
 
   constructor(private router : Router){}
 
@@ -24,7 +27,7 @@ verifyLogin(url) : any{
 }
 public isLoggedIn(): boolean{
   let status = false;
-  if( localStorage.getItem('isLoggedIn') == "true"){
+  if( this.authService.isLogged()){
     status = true;
   }
   else{
