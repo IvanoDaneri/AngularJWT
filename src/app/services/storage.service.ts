@@ -7,6 +7,7 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 
+// Sessione management
 export class StorageService {
   constructor() {}
 
