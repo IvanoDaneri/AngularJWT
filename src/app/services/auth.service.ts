@@ -3,8 +3,9 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError } from 'rxjs';
 import { Observable, of, throwError } from "rxjs";
 import { StorageService } from '../services/storage.service';
-import { ICredentials } from '../login';
+import { ICredential } from '../credential';
 import { ISession } from '../session';
+import ISessionResult from '../sessionResult';
 
 // Rest service for logon/logoff
 const LOGON_URL = 'http://localhost:8092/springBootRest/logon';
@@ -15,12 +16,13 @@ const LOGOFF_URL = 'http://localhost:8092/springBootRest/logoff';
 })
 export class AuthService {
 
+  sessionResult: ISessionResult = { user: null, role: null, token: null, message: null };
   storageService: StorageService = inject(StorageService);
 
   constructor(private http: HttpClient) {
   }
 
-  login(credentials: ICredentials): Observable<ICredentials> {
+  login(credentials: ICredential): Observable<ISessionResult> {
     return new Observable(observer => {
 
       const headers = {'Content-Type': 'application/json'}
@@ -30,22 +32,24 @@ export class AuthService {
       .subscribe({
         next: session => {
           if(session == null) {
-            credentials.message = "Invalid user id or password";
-            observer.next(credentials);
+            this.sessionResult.message = "Invalid user id or password";
+            observer.next(this.sessionResult);
             observer.complete();
           }
           else {
-            credentials.token = session.token;
             this.storageService.saveUser(session);
-            console.log('User: ' + credentials.user + ' logged')
-            observer.next(credentials);
+            console.log('User: ' + credentials.user + ' logged');
+            this.sessionResult.user = session.user;
+            this.sessionResult.role = session.role;
+            this.sessionResult.token = session.token;
+            observer.next(this.sessionResult);
             observer.complete();
           }
         },
         error: error => {
-          credentials.message = "Error calling login service";
-          console.error(credentials.message, error);
-          observer.next(credentials);
+          this.sessionResult.message = "Error calling login service";
+          console.error(this.sessionResult.message, error);
+          observer.next(this.sessionResult);
           observer.complete();
         }
       });

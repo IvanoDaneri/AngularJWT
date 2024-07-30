@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ICredentials } from '../login';
+import { ICredential } from '../credential';
+import ISessionResult from '../sessionResult';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
@@ -14,7 +15,7 @@ import { Observable, of, throwError } from "rxjs";
 })
 export class LoginComponent implements OnInit {
 
-  credentials: ICredentials = { user: "myAdmin", password: "myAdminPassword", token: null, message: null };
+  credential: ICredential = { user: "myAdmin", password: "myAdminPassword"};
   authService: AuthService = inject(AuthService);
   loginForm: FormGroup;
   message: string;
@@ -50,13 +51,13 @@ export class LoginComponent implements OnInit {
     }
     else {
 
-      this.credentials.user = this.f['userid'].value;
-      this.credentials.password = this.f['password'].value;
+      this.credential.user = this.f['userid'].value;
+      this.credential.password = this.f['password'].value;
 
-      this.authService.login(this.credentials)
-      .subscribe((credentials: ICredentials) => {
-        if(this.credentials.token == null){
-          this.message = this.credentials.message;
+      this.authService.login(this.credential)
+      .subscribe((sessionResult: ISessionResult) => {
+        if(sessionResult.token == null){
+          this.message = sessionResult.message;
         }
         else {
           this.router.navigate([this.returnUrl]);
