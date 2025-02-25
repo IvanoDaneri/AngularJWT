@@ -8,6 +8,18 @@ import { LogoutComponent } from './logout/logout.component';
 import { AuthGuard } from './auth.guard';
 
 
+/*
+About of:
+
+    canActivate: [AuthGuard]
+
+Interface that a class can implement to be a guard deciding if a route can be activated. 
+If all guards return true, navigation continues. If any guard returns false, navigation is cancelled. 
+If any guard returns a UrlTree, the current navigation is cancelled and a new navigation begins to the 
+UrlTree returned from the guard.
+*/
+
+
 const routes: Routes = [
   {
     component: CompanyComponent,

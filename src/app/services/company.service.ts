@@ -33,6 +33,7 @@ export class CompanyService {
                 if(companies == null) {
                     this.message = "Invalid user id or password";
                     console.error(this.message);
+                    // This is a toaster to show the error
                     this.snackBar.open(this.message, this.action, {duration: 10000,})
                     observer.next(this.emptyCompanies);
                     observer.complete();
@@ -45,6 +46,7 @@ export class CompanyService {
                 error: error => {
                 this.message = "Error calling login service";
                 console.error(this.message);
+                // This is a toaster to show the error
                 this.snackBar.open(this.message, this.action, {duration: 10000,})
                 observer.next(this.emptyCompanies);
                 observer.complete();
