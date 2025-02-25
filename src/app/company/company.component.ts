@@ -36,12 +36,12 @@ export class CompanyComponent {
   // Column Definitions: Defines the columns to be displayed.
   public columnDefs: ColDef[] = [
     { field: "id", maxWidth: 50 },
-    { field: "name", minWidth: 100 },
+    { field: "name", minWidth: 120, maxWidth: 150 },
     { field: "code", maxWidth: 120 },
-    { field: "address", minWidth: 150 },
-    { field: "type", maxWidth: 100 },
-    { field: "insertDate", maxWidth: 180 },
-    { field: "lastUpdate", maxWidth: 180 },
+    { field: "address", minWidth: 130, maxWidth: 280 },
+    { field: "type", maxWidth: 120 },
+    { field: "insertDate", maxWidth: 200 },
+    { field: "lastUpdate", maxWidth: 200 },
   ];
   public defaultColDef: ColDef = {
     flex: 1,
