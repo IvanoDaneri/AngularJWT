@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ISession } from '../session';
+import { ISession } from '../interfaces/session';
 
 const USER_KEY = 'auth-user';
 

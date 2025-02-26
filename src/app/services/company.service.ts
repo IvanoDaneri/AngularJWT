@@ -4,7 +4,7 @@ import { catchError } from 'rxjs';
 import { Observable, of, throwError } from "rxjs";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { StorageService } from '../services/storage.service';
-import { ICompany } from "../company"
+import { ICompany } from "../interfaces/company"
 
 const GET_COMPANY_URL = 'http://localhost:8092/springBootRest/companies';
 

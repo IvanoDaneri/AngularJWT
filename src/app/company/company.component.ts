@@ -18,7 +18,7 @@ import {
 /*import { ClientSideRowModelModule } from 'ag-grid-community';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);*/
 import { CompanyService } from '../services/company.service';
-import { ICompany } from "../company"
+import { ICompany } from "../interfaces/company"
 
 
 @Component({

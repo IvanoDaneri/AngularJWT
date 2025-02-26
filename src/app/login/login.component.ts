@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ICredential } from '../credential';
-import ISessionResult from '../sessionResult';
+import { ICredential } from '../interfaces/credential';
+import ISessionResult from '../interfaces/sessionResult';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';

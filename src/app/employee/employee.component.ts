@@ -18,7 +18,7 @@ import {
 /*import { ClientSideRowModelModule } from 'ag-grid-community';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);*/
 import { EmployeeService } from '../services/employee.service';
-import { IEmployee } from "../employee"
+import { IEmployee } from "../interfaces/employee"
 
 
 @Component({

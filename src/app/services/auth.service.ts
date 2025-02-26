@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError } from 'rxjs';
 import { Observable, of, throwError } from "rxjs";
 import { StorageService } from '../services/storage.service';
-import { ICredential } from '../credential';
-import { ISession } from '../session';
-import ISessionResult from '../sessionResult';
+import { ICredential } from '../interfaces/credential';
+import { ISession } from '../interfaces/session';
+import ISessionResult from '../interfaces/sessionResult';
 
 // Rest service for logon/logoff
 const LOGON_URL = 'http://localhost:8092/springBootRest/logon';
