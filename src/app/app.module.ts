@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FooterComponent } from './footer/footer.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 /*
@@ -29,7 +30,8 @@ See Angular.docx.
     HomeComponent,
     LoginComponent,
     LogoutComponent,
-    FooterComponent
+    FooterComponent,
+    MenuComponent
   ],
     imports: [
     BrowserModule,

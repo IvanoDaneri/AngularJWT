@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { IMenuStructure } from "./interfaces/menu"
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -14,6 +15,26 @@ export class AppComponent {
   authService: AuthService = inject(AuthService);
   checkLogin:boolean=true;
   checkLogout:boolean=false;
+
+  // Definition of menu structure to set to MenuComponent
+  public menuStructureList: IMenuStructure[] = [
+    {
+      id: 1,
+      isDropDownMenu: false,
+      description: "Company",
+      url: "company",
+      dropDownTarget: "",
+      subMenuList: []
+    },
+    {
+      id: 2,
+      isDropDownMenu: false,
+      description: "Employee",
+      url: "employee",
+      dropDownTarget: "",
+      subMenuList: []
+    }
+  ];
 
   constructor(private router: Router) { 
   }

@@ -1,7 +1,14 @@
 <ul>
   <li ><a class="rest" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+<!--
   <li ><a routerLink="company" class="rest" routerLinkActive="active-link">Company</a></li>
   <li ><a routerLink="employee" class="rest" routerLinkActive="active-link">Employee</a></li>
+  -->
+<!--
+  "app-menu" is the component to create an horizontal menu (in this case with two items, company and employee).
+  The result is equivalent to previous commented lines.
+  -->
+  <app-menu [menuStructureList]="menuStructureList"> </app-menu>    
   <div *ngIf="checkLogin">
     <li><a class="login" routerLink="login" routerLinkActive="active-link">Login</a></li>
   </div>

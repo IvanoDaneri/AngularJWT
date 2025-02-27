@@ -1,1 +1,5 @@
-<p>menu works!</p>
+
+<div *ngFor="let menuStructure of menuStructureList">
+<li ><a [routerLink]="[menuStructure.url]" class="rest" routerLinkActive="active-link">{{ menuStructure.description }}</a></li>    
+
+
