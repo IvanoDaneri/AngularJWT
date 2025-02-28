@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompanyComponent } from './company/company.component';
+import { AddCompanyComponent } from './add-company/add-company.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -27,8 +29,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   }, 
   {
+    component: AddCompanyComponent,
+    path: 'addCompany',
+    canActivate: [AuthGuard]
+  }, 
+  {
     component: EmployeeComponent,
     path: 'employee',
+    canActivate: [AuthGuard]
+  }, 
+  {
+    component: AddEmployeeComponent,
+    path: 'addEmployee',
     canActivate: [AuthGuard]
   }, 
   {
