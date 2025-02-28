@@ -1,0 +1,25 @@
+<body>
+    <section class="listing-apply">
+        <h2 class="section-heading">Add/Update Company</h2>
+        <form [formGroup]="applyForm" (submit)="submitApplication()">
+            <label for="company-name">Company Name:</label>
+            <input id="company-name" type="text" formControlName="companyName" required>
+
+            <label for="company-code">Company Code:</label>
+            <input id="company-code" type="text" formControlName="companyCode" required>
+
+            <label for="company-adress">Company Address:</label>
+            <input id="company-adress" type="text" formControlName="companyAdress" required>
+
+            <label for="company-type">Company Type:</label>
+            <input id="company-type" type="text" formControlName="companyType" required>
+
+            <div class="center">
+                <button type="submit" class="primary">Add/Update</button>
+            </div>
+        </form>
+    </section>
+
+    <app-standalone-footer></app-standalone-footer>
+</body>
+  

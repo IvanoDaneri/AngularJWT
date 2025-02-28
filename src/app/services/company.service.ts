@@ -53,5 +53,10 @@ export class CompanyService {
                 }
             });
         })
-    }        
+    }
+    
+    addCompany(name: string, code: string, address: string, type: string) {
+        console.log(name, code, address, type);
+      }
+        
 }
