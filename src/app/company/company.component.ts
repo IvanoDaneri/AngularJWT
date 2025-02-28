@@ -17,6 +17,7 @@ import {
 } from 'ag-grid-community';
 /*import { ClientSideRowModelModule } from 'ag-grid-community';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);*/
+import { StandaloneFooterComponent } from '../standalone-footer/standalone-footer.component';
 import { CompanyService } from '../services/company.service';
 import { ICompany } from "../interfaces/company"
 
@@ -24,7 +25,8 @@ import { ICompany } from "../interfaces/company"
 @Component({
   selector: 'app-company',
   standalone: true,
-  imports: [AgGridAngular], // Add Angular Data Grid Component
+  imports: [AgGridAngular,  // Add Angular Data Grid Component
+    StandaloneFooterComponent], 
   templateUrl: './company.component.html',
   styleUrl: './company.component.css'
 })

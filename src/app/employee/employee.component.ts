@@ -17,6 +17,7 @@ import {
 } from 'ag-grid-community';
 /*import { ClientSideRowModelModule } from 'ag-grid-community';
 ModuleRegistry.registerModules([ClientSideRowModelModule]);*/
+import { StandaloneFooterComponent } from '../standalone-footer/standalone-footer.component';
 import { EmployeeService } from '../services/employee.service';
 import { IEmployee } from "../interfaces/employee"
 
@@ -24,7 +25,8 @@ import { IEmployee } from "../interfaces/employee"
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [AgGridAngular], // Add Angular Data Grid Component
+  imports: [AgGridAngular,  // Add Angular Data Grid Component
+    StandaloneFooterComponent], 
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
 })

@@ -1,19 +1,117 @@
+<!--
+1) Final solution for the menu. 
+ We use bootstrap dropdown to create a dropdown menu and integrate dropdown with routing
+-->  
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+          Company
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="company" routerLinkActive="active-link">Companies</a>
+            <a class="dropdown-item" href="#">Add Company</a>
+          </div>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+          Employee
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="employee" routerLinkActive="active-link">Employees</a>
+            <a class="dropdown-item" href="#">Add Employee</a>
+            <!-- 
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+            -->
+          </div>
+          <li class="nav-item active">
+            <div *ngIf="checkLogin">
+              <li><a class="nav-link" routerLink="login" routerLinkActive="active-link">Login</a></li>
+            </div>
+            <div *ngIf="checkLogout">
+              <li><a class="nav-link" routerLink="logout" (click)="logout()">Logout</a></li>
+            </div>                      
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+
+<!--
+2) Basic solution of menu. This is the original menu, that is an horizontal menu.
+ -->
+
+<!--
 <ul>
   <li ><a class="rest" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
-<!--
   <li ><a routerLink="company" class="rest" routerLinkActive="active-link">Company</a></li>
   <li ><a routerLink="employee" class="rest" routerLinkActive="active-link">Employee</a></li>
+
+ <div *ngIf="checkLogin">
+    <li><a class="login" routerLink="login" routerLinkActive="active-link">Login</a></li>
+  </div>
+  <div *ngIf="checkLogout">
+    <li><a class="login" routerLink="logout" (click)="logout()">Logout</a></li>
+  </div>
+
+  </ul>  
   -->
+
+
 <!--
+3) Solution of menu using "app-menu" componente. This is the original menu, that is an horizontal menu.
   "app-menu" is the component to create an horizontal menu (in this case with two items, company and employee).
-  The result is equivalent to previous commented lines.
-  -->
+  The result is equivalent to the commented lines:
+
+  <li ><a routerLink="company" class="rest" routerLinkActive="active-link">Company</a></li>
+  <li ><a routerLink="employee" class="rest" routerLinkActive="active-link">Employee</a></li>
+-->
+
+<!--
+  <li ><a class="rest" routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
   <app-menu [menuStructureList]="menuStructureList"> </app-menu>    
+
   <div *ngIf="checkLogin">
     <li><a class="login" routerLink="login" routerLinkActive="active-link">Login</a></li>
   </div>
   <div *ngIf="checkLogout">
     <li><a class="login" routerLink="logout" (click)="logout()">Logout</a></li>
   </div>
-</ul>
+
+  </ul>
+  -->
 <router-outlet></router-outlet>
